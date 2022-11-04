@@ -29,18 +29,23 @@ export default class UserController implements UserControllerI {
             UserController.userController = new UserController();
 
             // RESTful User Web service API
-            app.get("/api/users",
-                UserController.userController.findAllUsers);
-            app.get("/api/users/:uid",
-                UserController.userController.findUserById);
             app.post("/api/users",
                 UserController.userController.createUser);
-            app.put("/api/users/:uid",
-                UserController.userController.updateUser);
+            app.get("/api/users",
+                UserController.userController.findAllUsers);
+            app.get("/api/users/username/:username/delete",
+                UserController.userController.deleteUsersByUsername);
             app.delete("/api/users/:uid",
                 UserController.userController.deleteUser);
+            app.get("/api/users/:uid",
+                UserController.userController.findUserById);
+            app.put("/api/users/:uid",
+                UserController.userController.updateUser);
             app.delete("/api/users",
                 UserController.userController.deleteAllUsers);
+            app.post("/api/login",
+                UserController.userController.login);
+
         }
         return UserController.userController;
     }
@@ -114,4 +119,17 @@ export default class UserController implements UserControllerI {
         UserController.userDao.deleteAllUsers()
             .then((status) => res.send(status));
 
+    login = (req: Request, res: Response) =>
+        UserController.userDao
+            .findUserByCredentials(req.body.username, req.body.password)
+            .then(user => {
+                res.json(user)
+            });
+
+    deleteUsersByUsername = (req: Request, res: Response) =>
+        UserController.userDao
+            .deleteUsersByUsername(req.params.username)
+            .then(status => res.send(status)
+            );
+    
 }
