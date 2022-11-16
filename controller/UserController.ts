@@ -131,5 +131,5 @@ export default class UserController implements UserControllerI {
             .deleteUsersByUsername(req.params.username)
             .then(status => res.send(status)
             );
-    
+
 }
