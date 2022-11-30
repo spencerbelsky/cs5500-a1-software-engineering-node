@@ -5,6 +5,7 @@
 import TuitModel from "../mongoose/tuits/TuitModel";
 import Tuit from "../models/tuits/Tuit";
 import TuitDaoI from "../interfaces/tuits/TuitDaoI";
+import Stats from "../models/tuits/Stats";
 
 /**
  * @class UserDao Implements Data Access Object managing data storage
@@ -20,14 +21,29 @@ export default class TuitDao implements TuitDaoI{
         return TuitDao.tuitDao;
     }
     private constructor() {}
+
+    /**
+     * Returns all tuits in an array.
+     * @returns Promise to be returned when a user wants a tuit array.
+     */
     findAllTuits = async (): Promise<Tuit[]> =>
         TuitModel.find()
             .populate("postedBy")
             .exec();
+
+    /**
+     * Returns all tuits in an array by userId.
+     * @returns Promise to be returned when a user wants a tuit array.
+     */
     findAllTuitsByUser = async (uid: string): Promise<Tuit[]> =>
         TuitModel.find({postedBy: uid})
             .populate("postedBy")
             .exec();
+
+    /**
+     * Returns a tuit by the id.
+     * @returns Promise to be returned when a user wants a specific tuit.
+     */
     findTuitById = async (uid: string): Promise<any> =>
         TuitModel.findById(uid)
             .populate("postedBy")
@@ -44,4 +60,9 @@ export default class TuitDao implements TuitDaoI{
 
     deleteTuit = async (uid: string): Promise<any> =>
         TuitModel.deleteOne({_id: uid});
+
+    updateLikes = async (tid: string, newStats: Stats) =>
+            TuitModel.updateOne(
+                {_id: tid},
+                {$set: {stats: newStats}});
 }

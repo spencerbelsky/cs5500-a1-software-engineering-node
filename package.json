@@ -14,10 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.25.0",
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "dotenv": "github:motdotla/dotenv",
     "express": "^4.17.2",
+    "express-session": "^1.17.3",
     "grep": "^0.1.0",
     "mongoose": "^6.6.2",
     "typescript": "^4.5.4"

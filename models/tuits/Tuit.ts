@@ -2,6 +2,7 @@
  * @file Creates the Tuit data type representing a Tuit and its details.
  */
 import User from "../users/User";
+import Stats from "./Stats";
 
 /**
  * @typedef Tuit Represents a tuit object.
@@ -15,4 +16,5 @@ export default interface Tuit {
     tuit: string,
     postedBy: User,
     postedOn?: Date,
+    stats: Stats,
 };
