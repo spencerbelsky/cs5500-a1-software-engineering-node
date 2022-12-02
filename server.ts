@@ -17,6 +17,7 @@ import express, {Request, Response} from 'express';
 import UserController from "./controller/UserController";
 import TuitController from "./controller/TuitController";
 import LikeController from "./controller/LikeController";
+import DislikeController from "./controller/DislikeController";
 import MessageController from "./controller/MessageController";
 import BookmarkController from "./controller/BookmarkController";
 import FollowController from "./controller/FollowController";
@@ -75,6 +76,7 @@ const likesController = LikeController.getInstance(app);
 const messagesController = MessageController.getInstance(app);
 const bookmarksController = BookmarkController.getInstance(app);
 const followsController = FollowController.getInstance(app);
+const dislikesController = DislikeController.getInstance(app);
 AuthenticationController(app)
 /**
  * Start a server listening at port 4000 locally
