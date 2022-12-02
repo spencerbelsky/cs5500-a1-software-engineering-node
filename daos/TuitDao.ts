@@ -65,4 +65,15 @@ export default class TuitDao implements TuitDaoI{
             TuitModel.updateOne(
                 {_id: tid},
                 {$set: {stats: newStats}});
+
+    /**
+     * Updates likes stats with new values in the database as tuits are liked and disliked.
+     * @param {string} tid Primary key of tuit
+     * @param {Stats} newStats new stats for the tuit
+     */
+    updateStats = async (tid: string, newStats: Stats) =>
+        TuitModel.updateOne(
+            {_id: tid},
+            {$set: {stats: newStats}}
+        )
 }
