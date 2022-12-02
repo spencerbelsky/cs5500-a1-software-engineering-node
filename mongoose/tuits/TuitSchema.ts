@@ -18,6 +18,12 @@ const TuitSchema = new mongoose.Schema<Tuit>({
         type: String, required: true
     },
     postedOn: {type: Date},
+    stats: {
+        replies: {type: Number, default: 0},
+        retuits: {type: Number, default: 0},
+        likes: {type: Number, default: 0},
+        dislikes: {type: Number, default: 0}
+    },
     postedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}
 }, {collection: 'tuits'});
 
